@@ -2,178 +2,288 @@
 #include <vector>
 #include <string>
 
-// Logicke operatore
-// == - ispitivanje jednakosti
-// && - logicki operator AND
-// || - logicki OR 
-// ^^ - logicki XOR
-// < - operator LESS THAN
-// > - operator GREATER THAN
-// <= - operator LESS THAN OR EQUAL
-// >= - operator GREATER THAN OR EQUAL
-// != - operator DIFFERENT
-
-// 1 1 2 3 5 8 13 21
-
-/* 
-object
-|_object
-	|_object
-		|_object
-*/
-
-/*
-1
-11
-111
-1111
-11111
-111111
-*/
-// int first = 3
-// int var = first
-// var * 10 + first
-
-// Namespace excercise
-namespace machina
+class Vector3
 {
-	void cout(const char* value)
+public:
+	Vector3()
 	{
-		std::cout << value << std::endl;
+		x = 0;
+		y = 0;
+		z = 0;
 	}
-}
 
-void PrintNumbers(int iterator, int count)
-{
-	if (iterator < count)
+	Vector3(int xPos, int yPos, int zPos)
 	{
-		std::cout << iterator << std::endl;
-		++iterator;
-		PrintNumbers(iterator, count);
+		x = xPos;
+		y = yPos;
+		z = zPos;
+		floatingMember = 33.33f;
 	}
-}
 
-void FibonacciArray(int max, int count = 0, int previous = 0, int current = 1)
-{
-	if (count == 0)
+	~Vector3()
 	{
-		std::cout << count << " : " << current << std::endl;
+		std::cout << "Unistio sam se!" << std::endl;
 	}
-	if (count < max - 1)
+
+	Vector3 operator-(Vector3 second)
 	{
-		int nextNumber = previous + current;
-		std::cout << count + 1  << " : " << nextNumber << std::endl;
-		previous = current;
-		++count;
-		FibonacciArray(max, count, previous, nextNumber);
-	}
-}
-
-int Sum(int numberOne, int numberTwo)
-{
-	int result = numberOne + numberTwo;
-	return result;
-}
-
-int Subtract(int numberOne, int numberTwo)
-{
-	int result = numberOne - numberTwo;
-	std::cout << "Resultat oduzimanja " << numberOne << " i " << numberTwo << " je " << result << std::endl;
-	return result;
-}
-
-int Divide(int numberOne, int numberTwo)
-{
-	if (numberTwo != 0)
-	{
-		int result = numberOne / numberTwo;
-		std::cout << "Resultat dijeljenja " << numberOne << " i " << numberTwo << " je " << result << std::endl;
+		Vector3 result;
+		result.x = x - second.x;
+		result.y = y - second.y;
+		result.z = z - second.z;
 		return result;
 	}
-	std::cout << "Error: Cannot divide by Zero" << std::endl;
-	return -1;
-}
 
-int Multiply(int numberOne, int numberTwo)
+	Vector3 operator*(Vector3 second)
+	{
+		Vector3 result;
+		result.x = x * second.x;
+		result.y = y * second.y;
+		result.z = z * second.z;
+		return result;
+	}
+
+	Vector3 operator/(Vector3 second)
+	{
+		Vector3 result;
+		result.x = x / second.x;
+		result.y = y / second.y;
+		result.z = z / second.z;
+		return result;
+	}
+
+	Vector3 operator+(Vector3 second)
+	{
+		Vector3 result;
+		result.x = x + second.x;
+		result.y = y + second.y;
+		result.z = z + second.z;
+		return result;
+	}
+
+	bool operator==(Vector3 second)
+	{
+		if (x == second.x && y == second.y && z == second.z)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	bool operator!=(Vector3 second)
+	{
+		if (x == second.x && y == second.y && z == second.z)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	// overloadat operatore -, *, /, !=, ==
+
+	int x, y, z;
+
+	int SumOfCoordinates()
+	{
+		return x + y + z;
+	}
+
+	void Print()
+	{
+		std::cout << "[" << x << ", " << y << ", " << z << "]";
+	}
+
+	float GetFloatingMember()
+	{
+		return floatingMember;
+	}
+
+	// DZ:
+	// Overloadat operatore ++, --, *=, /=
+	// za hrabre: Overloadat cout i cin
+
+	// friend std::ostream operator<<() {}
+private:
+	float floatingMember;
+};
+
+class Vector3f
 {
-	int result = numberOne * numberTwo;
-	std::cout << "Rezultat mnozenja " << numberOne << " i " << numberTwo << " je " << result << std::endl;
-	return result;
-}
+public:
+	Vector3f()
+	{
+		x = 0;
+		y = 0;
+		z = 0;
+	}
 
-/*
-   0    1   2    3
-| 115 | 5 | 6 | 10 |
-*/
-int main()
+	Vector3f(float xPos, float yPos, float zPos)
+	{
+		x = xPos;
+		y = yPos;
+		z = zPos;
+		floatingMember = 33.33f;
+	}
+
+	~Vector3f()
+	{
+		std::cout << "Unistio sam se!" << std::endl;
+	}
+
+	Vector3f operator-(Vector3f second)
+	{
+		Vector3f result;
+		result.x = x - second.x;
+		result.y = y - second.y;
+		result.z = z - second.z;
+		return result;
+	}
+
+	Vector3f operator*(Vector3f second)
+	{
+		Vector3f result;
+		result.x = x * second.x;
+		result.y = y * second.y;
+		result.z = z * second.z;
+		return result;
+	}
+
+	Vector3f operator/(Vector3f second)
+	{
+		Vector3f result;
+		result.x = x / second.x;
+		result.y = y / second.y;
+		result.z = z / second.z;
+		return result;
+	}
+
+	Vector3f operator+(Vector3f second)
+	{
+		Vector3f result;
+		result.x = x + second.x;
+		result.y = y + second.y;
+		result.z = z + second.z;
+		return result;
+	}
+
+	bool operator==(Vector3f second)
+	{
+		if (x == second.x && y == second.y && z == second.z)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	bool operator!=(Vector3f second)
+	{
+		if (x == second.x && y == second.y && z == second.z)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	// overloadat operatore -, *, /, !=, ==
+
+	float x, y, z;
+
+	int SumOfCoordinates()
+	{
+		return x + y + z;
+	}
+
+	void Print()
+	{
+		std::cout << "[" << x << ", " << y << ", " << z << "]";
+	}
+
+	float GetFloatingMember()
+	{
+		return floatingMember;
+	}
+
+	// DZ:
+	// Overloadat operatore ++, --, *=, /=
+	// za hrabre: Overloadat cout i cin
+
+	// friend std::ostream operator<<() {}
+private:
+	float floatingMember;
+};
+
+void iterate(int *arr)
 {
-	machina::cout("Machina output string");
-	int twoDimensionalArray[3][3] =
-	{	// y os
-		{1, 5, 7}, // x os
-		{8, 3, 9},
-		{2, 4, 6}
-	};
-
 	for (int i = 0; i < 3; i++)
 	{
-		for (int j = 0; j < 3; j++)
-		{
-			std::cout << "[" << twoDimensionalArray[i][j] << "] ";
-		}
-		std::cout << std::endl;
+		std::cout << arr << std::endl;
+		arr++;
 	}
+	// std::cout << i << std::endl; - i is out of scope and no longer exists!
+}
 
-	int threeDimensionalArray[3][3][3] =
-	{	
-		{
-			{1, 5, 7},
-			{8, 3, 9},
-			{2, 4, 6}
-		},
-		{
-			{10, 50, 70},
-			{80, 30, 90},
-			{20, 40, 60}
-		},
-		{
-			{100, 500, 700},
-			{800, 300, 900},
-			{200, 400, 600}
-		},
-	};
+int main()
+{
+	int number = 10;
+	int number2 = 3;
+	int* ref = &number;
+	int** doubleRef = &ref;
 
-	std::cout << threeDimensionalArray[1][2][0] << std::endl;
-	int unos;
-	std::cin >> unos;
+	float fNumber = 10.5f;
+	float* fRef = &fNumber;
+	*ref = 30;
+	int& refference = number;
+	refference = number2;
+
+	int* ptr = &number;
+	std::cout << *ptr << std::endl;
+
+	ptr = &number2;
+	std::cout << *ptr << std::endl;
+
+	Vector3 person = Vector3(10, 20, 30);
 
 
-	int matrix[4][4] =
-	{	// y os
-		{1, 5, 7, 4}, // x os
-		{8, 3, 9, -1},
-		{2, 4, 6, -15},
-		{5, -3, 6, 12}
-	};
+	std::cout << "Sum of person coordinates: " << person.SumOfCoordinates() << std::endl;
+	std::cout << "Person's coordinate X: " << person.x << std::endl;
+	std::cout << "Person's coordinate Y: " << person.y << std::endl;
+	std::cout << "Person's coordinate Z: " << person.z << std::endl;
 
-	int leftDiagonal = 0;
-	int rightDiagonal = 0;
-	int size = 4;
-	for ( int i = 0; i < 4; i++)
+	std::cout << "Person's floatingMember value is: " << person.GetFloatingMember() << std::endl;
+
+
+	void* personPtr = &person;
+	std::cout << ref << std::endl;
+	std::cout << ptr << std::endl;
+	std::cout << *ref << std::endl;
+
+	int arr[] = { 1, 7, 3 };
+
+	iterate(arr);
+
+	std::cout << "Double refference: " << std::endl;
+	std::cout << "Double refference address: " << doubleRef << std::endl;
+	std::cout << "Double refference value: " << *doubleRef << std::endl;
+	std::cout << "Refference address: " << ref << std::endl;
+	std::cout << "Refference value: " << *ref << std::endl;
+	std::cout << "Double refference reffence value: " << **doubleRef << std::endl;
+
 	{
-		leftDiagonal += matrix[i][i];
-		rightDiagonal += matrix[--size][i];
+		Vector3 position = Vector3(1, 2, 3);
+	}
+	std::cout << "position vector je van scopea!" << std::endl;
+
+	Vector3 playerPosition = Vector3(35, 28, 13);
+	Vector3 playerTwoPosition = Vector3(100, 100, 100);
+
+	Vector3 sum = playerPosition + playerTwoPosition;
+
+	if (playerPosition == playerTwoPosition)
+	{
+
 	}
 
-	std::cout << leftDiagonal - rightDiagonal << std::endl;
-	if (leftDiagonal - rightDiagonal == 0)
-	{
-		std::cout << "Matrica je najljepsa!" << std::endl;
-	}
-	else
-	{
-		std::cout << "Matrica je losa!" << std::endl;
-	}
+	//std::cout << sum << std::endl;
 
 	system("pause");
 }
