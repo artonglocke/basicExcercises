@@ -184,6 +184,7 @@ public:
 		return true;
 	}
 
+
 	// overloadat operatore -, *, /, !=, ==
 
 	float x, y, z;
