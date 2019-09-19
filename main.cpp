@@ -103,115 +103,76 @@ public:
 	// za hrabre: Overloadat cout i cin
 
 	// friend std::ostream operator<<() {}
+	friend std::ostream & operator <<(std::ostream &output, const Vector3 &value)
+	{
+		output << "[" << value.x << ", " << value.y << ", " << value.z << "]";
+		return output;
+	}
+
+	friend std::istream & operator >>(std::istream &input, Vector3 &value)
+	{
+
+		bool noerror = false;
+		while (!noerror)
+		{
+			std::cout << "Enter value X: ";
+			if (!(input >> value.x))
+			{
+				noerror = false;
+			}
+			else
+			{
+				noerror = true;
+			}
+			
+			std::cout << std::endl;
+			input.clear();
+			input.ignore(10000, '\n ');
+		}
+		
+		noerror = false;
+		while (!noerror)
+		{
+			std::cout << "Enter value Y: ";
+			if (!(input >> value.y))
+			{
+				noerror = false;
+			}
+			else
+			{
+				noerror = true;
+			}
+
+			std::cout << std::endl;
+			input.clear();
+			input.ignore(10000, '\n ');
+		}
+
+		noerror = false;
+		while (!noerror)
+		{
+			std::cout << "Enter value Z: ";
+			if (!(input >> value.z))
+			{
+				noerror = false;
+			}
+			else
+			{
+				noerror = true;
+			}
+
+			std::cout << std::endl;
+			input.clear();
+			input.ignore(10000, '\n ');
+		}
+
+		return input;
+	}
+
 private:
 	float floatingMember;
 };
 
-class Vector3f
-{
-public:
-	Vector3f()
-	{
-		x = 0;
-		y = 0;
-		z = 0;
-	}
-
-	Vector3f(float xPos, float yPos, float zPos)
-	{
-		x = xPos;
-		y = yPos;
-		z = zPos;
-		floatingMember = 33.33f;
-	}
-
-	~Vector3f()
-	{
-		std::cout << "Unistio sam se!" << std::endl;
-	}
-
-	Vector3f operator-(Vector3f second)
-	{
-		Vector3f result;
-		result.x = x - second.x;
-		result.y = y - second.y;
-		result.z = z - second.z;
-		return result;
-	}
-
-	Vector3f operator*(Vector3f second)
-	{
-		Vector3f result;
-		result.x = x * second.x;
-		result.y = y * second.y;
-		result.z = z * second.z;
-		return result;
-	}
-
-	Vector3f operator/(Vector3f second)
-	{
-		Vector3f result;
-		result.x = x / second.x;
-		result.y = y / second.y;
-		result.z = z / second.z;
-		return result;
-	}
-
-	Vector3f operator+(Vector3f second)
-	{
-		Vector3f result;
-		result.x = x + second.x;
-		result.y = y + second.y;
-		result.z = z + second.z;
-		return result;
-	}
-
-	bool operator==(Vector3f second)
-	{
-		if (x == second.x && y == second.y && z == second.z)
-		{
-			return true;
-		}
-		return false;
-	}
-
-	bool operator!=(Vector3f second)
-	{
-		if (x == second.x && y == second.y && z == second.z)
-		{
-			return false;
-		}
-		return true;
-	}
-
-
-	// overloadat operatore -, *, /, !=, ==
-
-	float x, y, z;
-
-	int SumOfCoordinates()
-	{
-		return x + y + z;
-	}
-
-	void Print()
-	{
-		std::cout << "[" << x << ", " << y << ", " << z << "]";
-	}
-
-	float GetFloatingMember()
-	{
-		return floatingMember;
-	}
-
-	// DZ:
-	// Overloadat operatore ++, --, *=, /=
-	// za hrabre: Overloadat cout i cin
-
-	// friend std::ostream operator<<() {}
-private:
-	float floatingMember;
-};
 
 void iterate(int *arr)
 {
@@ -284,7 +245,7 @@ int main()
 
 	}
 
-	//std::cout << sum << std::endl;
+	std::cout << sum << std::endl;
 
 	system("pause");
 }
