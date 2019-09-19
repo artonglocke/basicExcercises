@@ -164,6 +164,7 @@ public:
 			std::cout << std::endl;
 			input.clear();
 			input.ignore(10000, '\n');
+
 		}
 
 		return input;
