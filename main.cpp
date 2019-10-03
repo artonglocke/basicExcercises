@@ -1,39 +1,44 @@
 ﻿#include <iostream>
-#include <string>
+#include <vector>
 
-		/*nadopuniti program tako da ovo radi :*/
-class number
+#include "Animals.h"
+#include "Mushrooms.h"
+#include "Plants.h"
+
+
+
+/* Napišite interface za geometrijsko tijelo i implementacije za kuglu i kocku.
+	Napišite funkciju koja prima polje tijela i
+	ispisuje naziv svakog tijela i njegov volumen. 
+	U programu stavite u polje kocku stranice 5 i kuglu polumjera 5 i pozovite funkciju*/
+/*
+	LIVE WORLD
+	|	|	|
+	M	P	A
+*/
+void foo(std::vector<GeoTijelo*> tijela)
 {
-public:
-	number(int i):
-		mNumber(i)
-	{}
-	number operator++(int)
+	for (GeoTijelo* : tijela)
 	{
-		int newNumber = mNumber;
-		++mNumber;
-		return newNumber;
+		
 	}
-	number operator++()
-	{
-		++mNumber;
-		return mNumber;
-	}
-	friend std::ostream& operator<<(std::ostream& os, const number& n);
-private:
-	int mNumber;
-};
-std::ostream& operator<<(std::ostream& outputStream, const number& n)
-{
-	return outputStream <<"["<< n.mNumber<<"]"<<std::endl;
 }
 int main()
 {
-	number num(2);
 
+	std::vector<LiveWorld*> creatures;
+	char c;
+	for (int i = 0; i != 3; ++i)
+	{
+		creatures.push_back(new Animals(15, "Krc",3 ));
+		creatures.push_back(new Mushrooms(2, "Muhara", 3));
+		creatures.push_back(new Plants(1, "Kupus", 0));
+	}
 
-	std::cout << num++ << std::endl;
-	std::cout << ++num << std::endl;
+	for (LiveWorld* i : creatures)
+	{
+		std::cout << "My name is: " << i->Name() << " and im " << i->Age() << " old!!!" << std::endl;
+		delete i;
+	}
 
 }
-
