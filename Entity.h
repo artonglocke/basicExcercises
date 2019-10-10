@@ -5,9 +5,7 @@ class Entity
 {
 public:
 	Entity();
-	~Entity();
+	virtual ~Entity();
 
-	virtual void printName();
-private:
-
+	virtual void printName() = 0;
 };

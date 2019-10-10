@@ -4,6 +4,7 @@
 class Sphere : public IShape
 {
 public:
+	Sphere();
 	Sphere(std::string name, float radius);
 	~Sphere();
 

@@ -3,6 +3,11 @@
 #define VOLUME_RATIO 4.0f / 3.0f
 #define PI 3.14
 
+Sphere::Sphere() : 
+	_name("Sphere"), _radius(10)
+{
+}
+
 Sphere::Sphere(std::string name, float radius) :
 	_name(name), _radius(radius)
 {
