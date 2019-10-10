@@ -118,15 +118,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animals.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mushrooms.cpp" />
     <ClCompile Include="Plants.cpp" />
+    <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animals.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="IShape.h" />
     <ClInclude Include="LiveWorld.h" />
     <ClInclude Include="Mushrooms.h" />
     <ClInclude Include="Plants.h" />
+    <ClInclude Include="Sphere.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

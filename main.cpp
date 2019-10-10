@@ -1,9 +1,10 @@
 ﻿#include <iostream>
 #include <vector>
+#include <string>
 
-#include "Animals.h"
-#include "Mushrooms.h"
-#include "Plants.h"
+#include "IShape.h"
+#include "Cube.h"
+#include "Sphere.h"
 
 
 
@@ -17,22 +18,21 @@
 	M	P	A
 */
 
+void print(std::vector<IShape*> shapes)
+{
+	for (IShape* shape : shapes)
+	{
+		std::cout << "Shape: " << shape->getName() << " Volumen: " << shape->getVolume() << std::endl;
+	}
+}
+
 int main()
 {
+	std::vector<IShape*> shapes;
+	shapes.push_back(new Cube("Cube", 5.0f));
+	shapes.push_back(new Sphere("Sphere", 5.0f));
+	print(shapes);
 
-	std::vector<LiveWorld*> creatures;
-	for (int i = 0; i != 3; ++i)
-	{
-		creatures.push_back(new Animals(15, "Krc",3 ));
-		creatures.push_back(new Mushrooms(2, "Muhara", 3));
-		creatures.push_back(new Plants(1, "Kupus", 0));
-	}
-
-	for (LiveWorld* i : creatures)
-	{
-		std::cout << "My name is: " << i->Name() << " and im " << i->Age() << " old!!!" << std::endl;
-		delete i;
-	}
 
 	system("pause");
 }
