@@ -11,7 +11,6 @@ Animals::Animals(int age, std::string name, int legs)
 
 Animals::~Animals()
 {
-	std::cout << "Unistio sam se " << std::endl;
 }
 int Animals::Age()
 {

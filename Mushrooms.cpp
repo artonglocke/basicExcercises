@@ -12,7 +12,6 @@ Mushrooms::Mushrooms(int age, std::string name, int legs)
 
 Mushrooms::~Mushrooms()
 {
-	std::cout << "Unistio sam se " << std::endl;
 
 }
 

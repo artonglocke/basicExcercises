@@ -10,8 +10,6 @@ Plants::Plants(int age, std::string name, int legs)
 
 Plants::~Plants()
 {
-	std::cout << "Unistio sam se " << std::endl;
-
 }
 
 int Plants::Age()

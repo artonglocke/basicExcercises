@@ -16,18 +16,11 @@
 	|	|	|
 	M	P	A
 */
-void foo(std::vector<GeoTijelo*> tijela)
-{
-	for (GeoTijelo* : tijela)
-	{
-		
-	}
-}
+
 int main()
 {
 
 	std::vector<LiveWorld*> creatures;
-	char c;
 	for (int i = 0; i != 3; ++i)
 	{
 		creatures.push_back(new Animals(15, "Krc",3 ));
@@ -41,4 +34,5 @@ int main()
 		delete i;
 	}
 
+	system("pause");
 }

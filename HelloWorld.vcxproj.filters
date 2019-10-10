@@ -18,12 +18,27 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vehicle.cpp">
+    <ClCompile Include="Animals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mushrooms.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Plants.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vehicle.h">
+    <ClInclude Include="LiveWorld.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mushrooms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
