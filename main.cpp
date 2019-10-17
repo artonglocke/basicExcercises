@@ -1,7 +1,5 @@
 ﻿#include <iostream>
 #include <string>
-#include "Vehicle.h"
-
 //5. Napisati program koji će od korisnika učitati dva pozitivna cijela broja te provjeriti da li im je suma
 //znamenki jednaka i u skladu s tim ispisati odgovarajuću poruku.
 //Npr.
@@ -57,7 +55,7 @@ void foo(std::string &value)
 
 	for (int i = 0; i < value.size(); i++)
 	{
-		if ( value[i] == 'A' || value[i] == 'E' || value[i] == 'I' 
+		if (value[i] == 'A' || value[i] == 'E' || value[i] == 'I'
 			|| value[i] == 'O' || value[i] == 'U')
 		{
 			value[i] = '-';
@@ -75,7 +73,7 @@ public:
 		return result;
 	}
 
-	byte operator++(int) 
+	byte operator++(int)
 	{
 		byte result;
 		result._value = ++_value;
@@ -87,7 +85,7 @@ public:
 		out << current._value;
 		return out;
 	}
-	
+
 	friend std::istream &operator>>(std::istream &input, byte &current)
 	{
 		int temp;
