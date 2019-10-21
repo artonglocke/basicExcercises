@@ -1,123 +1,101 @@
 ﻿#include <iostream>
-#include <string>
-//5. Napisati program koji će od korisnika učitati dva pozitivna cijela broja te provjeriti da li im je suma
-//znamenki jednaka i u skladu s tim ispisati odgovarajuću poruku.
-//Npr.
-//- Za brojeve 123 i 33 potrebno je ispisati : „Brojevi 123 i 33 imaju isti zbroj znamenki i on iznosi 6.“
-//- Za brojeve 123 i 58 potrebno je ispisati „Brojevi 123 i 58 nemaju isti zbroj znamenki“
+#include <list>
+#include <vector>
+#include <deque>
 
-//8. Proširite sljedečći program :
-//int main() {
-//	unsigned int arr[] = { 10,17,13,15 };
-//}
-//Da pronalazi i ispisuje prvi prosti broj u polju.
-//Prosti broj je prirodni broj veći od 1, djeljiv bez ostatka samo s brojem 1 i sa samim sobom.
-
-//9. Nadopuniti klasu byte koja podržava jednostavne računske operacije sa malim cijelim brojevima,
-//klasa kao privatni član ima char.
-//Za provjeru da li je broj veći od dozvoljene granice možete iskoristit CHAR_MAX ili
-//std::numeric_limits<char>::max();
-//U slučaju prekoračenja ispisati poruku o grešci te završiti izvođenje programa.
-//class byte {
-//	/*overload operatore-> istream, ostream, +, i ++
-//	potpis za operator ++
-//	byte operator++()(int){ TODO..}
-//	*/
-//};
-//int main() {
-//	byte a, b;
-//	std::cin >> a >> b;
-//	byte c = a + b;
-//	std::cout << c++;
-//}
-//
-//10. Napišite funkciju foo koja prima &std::string(referenca na string) te obavlja sljedeće operacije :
-//• Izbacuje sve znamenke
-//• Pretvara sve u velika slova
-//• Zamjenjuje sve samoglasnike sa crticom,
-
-void foo(std::string &value)
+enum Suite
 {
-	for (int i = value.size() - 1; i >= 0; i--)
-	{
-		if (value[i] >= '0' && value[i] <= '9')
-		{
-			value.erase(value.begin() + i);
-		}
-	}
-	for (int i = 0; i < value.size(); i++)
-	{
-		if (value[i] >= 'a' && value[i] <= 'z')
-		{
-			value[i] -= ' ';
-		}
-	}
-
-	for (int i = 0; i < value.size(); i++)
-	{
-		if (value[i] == 'A' || value[i] == 'E' || value[i] == 'I'
-			|| value[i] == 'O' || value[i] == 'U')
-		{
-			value[i] = '-';
-		}
-	}
-}
-
-class byte
-{
-public:
-	byte operator+(byte other)
-	{
-		byte result;
-		result._value = _value + other._value;
-		return result;
-	}
-
-	byte operator++(int)
-	{
-		byte result;
-		result._value = ++_value;
-		return result;
-	}
-
-	friend std::ostream &operator<<(std::ostream &out, const byte &current)
-	{
-		out << current._value;
-		return out;
-	}
-
-	friend std::istream &operator>>(std::istream &input, byte &current)
-	{
-		int temp;
-		input >> temp;
-
-		if (temp > std::numeric_limits<char>::max())
-		{
-			std::cout << "Error: char numeric limit breached!" << std::endl;
-		}
-		else
-		{
-			current._value = temp;
-			std::cin.ignore(1000, '\n');
-			std::cin.clear();
-		}
-		return input;
-	}
-
-private:
-	char _value;
+	Hearts,
+	Spades,
+	Diamonds,
+	Clubs
 };
 
+enum class Organs : char
+{
+	Hearts = 'h',
+	Livers = 'l'
+};
+
+class Card
+{
+public:
+	Card();
+	~Card();
+
+private:
+	std::string _name;
+	std::string _value;
+	Suite _suite;
+};
+
+class Player
+{
+public:
+	Player();
+	~Player();
+
+private:
+	std::string _name;
+	std::vector<Card> _hand;
+};
 
 int main()
 {
-	//byte a, b;
-	//std::cin >> a >> b;
-	//byte c = a + b;
-	//std::cout << c++;
+	std::list<int> listExample;
+	std::vector<int> vectorExample;
+	std::deque<int> dequeExample;
+	
+	//std::vector<Player> players;
+	//std::deque<Card> cards;
 
-	std::string value = "neKi rAnDom 5triNg!11111111112232153642542";
-	foo(value);
-	std::cout << value << std::endl;
+	// Pohrana
+	listExample.push_back(7);
+	vectorExample.push_back(7);
+
+	listExample.push_back(8);
+	vectorExample.push_back(8);
+
+	listExample.push_back(2);
+	listExample.push_back(4);
+	listExample.push_back(1);
+	listExample.push_back(9);
+
+	dequeExample.push_back(7);
+	dequeExample.push_front(8);
+
+	dequeExample.pop_back();
+	//std::cout << "List output: " << listExample[1] << std::endl;
+
+	for (int i = 0; i < vectorExample.size(); i++)
+	{
+		std::cout << "Vector output: " << vectorExample[i] << std::endl;
+	}
+
+	for (auto it = listExample.begin(); it != listExample.end(); ++it)
+	{
+		std::cout << "List output: " << *it << std::endl;
+	}
+
+	for (auto it = vectorExample.begin(); it != vectorExample.end(); it++)
+	{
+		std::cout << "Vector output: " << *it << std::endl;
+	}
+
+	std::list<int>::iterator it = listExample.begin();
+	std::advance(it, 3);
+	std::cout << "current value: " << *it << std::endl;
+	--it;
+	std::cout << "current value: " << *it << std::endl;
+	*it = 16;
+	std::cout << "current value: " << *it << std::endl;
+	std::cout << "#####################################" << std::endl;
+	// Wont work!
+	/*for (auto it = listExample.end(); it != listExample.begin(); it--)
+	{
+		std::cout << "Vector output: " << *it << std::endl;
+	}*/
+
+	Suite randomsuit = Hearts;
 	system("pause");
 }
