@@ -2,6 +2,9 @@
 #include <list>
 #include <vector>
 #include <deque>
+#include <map>
+#include <unordered_map>
+#include <string>
 
 enum Suite
 {
@@ -45,7 +48,34 @@ int main()
 	std::list<int> listExample;
 	std::vector<int> vectorExample;
 	std::deque<int> dequeExample;
+	std::map<std::string, std::string> mapExample;
+	std::pair<std::string, std::string> pairExample;
+	std::pair<std::string, std::string> secondPair;
+	pairExample.first = "Toni";
+	pairExample.second = "New";
+
+	secondPair = std::make_pair<std::string, std::string>("Karlo", "Seba");
+	mapExample["Artoff"] = "Glock";
+	mapExample["Ivan"] = "Jela";
+
+	std::cout << mapExample["Ivan"] << std::endl;
 	
+	
+	/*std::string check;
+	std::cin >> check;*/
+
+	//std::cout << mapExample[check] << std::endl;
+
+	mapExample.insert(pairExample);
+	mapExample.insert(secondPair);
+	std::cout << "#####################################" << std::endl;
+
+	for (auto it : mapExample)
+	{
+		std::cout << "Name: " << it.first << ", " << it.second << std::endl;
+	}
+	std::cout << "#####################################" << std::endl;
+
 	//std::vector<Player> players;
 	//std::deque<Card> cards;
 
@@ -64,8 +94,7 @@ int main()
 	dequeExample.push_back(7);
 	dequeExample.push_front(8);
 
-	dequeExample.pop_back();
-	//std::cout << "List output: " << listExample[1] << std::endl;
+	std::cout << "Deque output: " << dequeExample[1] << std::endl;
 
 	for (int i = 0; i < vectorExample.size(); i++)
 	{
@@ -97,5 +126,16 @@ int main()
 	}*/
 
 	Suite randomsuit = Hearts;
+	Organs organ = Organs::Hearts;
+
+	switch (organ)
+	{
+	case Organs::Hearts:
+		break;
+	case Organs::Livers:
+		break;
+	default:
+		break;
+	}
 	system("pause");
 }
