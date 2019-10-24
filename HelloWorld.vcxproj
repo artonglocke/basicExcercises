@@ -124,7 +124,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mushrooms.cpp" />
     <ClCompile Include="Plants.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,8 +135,8 @@
     <ClInclude Include="LiveWorld.h" />
     <ClInclude Include="Mushrooms.h" />
     <ClInclude Include="Plants.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Suit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
