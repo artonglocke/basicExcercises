@@ -95,6 +95,39 @@ void Array<T>::bubbleSort()
 	}
 }
 
+template <typename T>
+//T max();
+T Array<T>::max()
+{
+	T result = _ptr[0];
+	for (int i = 0; i < _size; i++)
+	{
+		if (result < _ptr[i])
+		{
+			result = _ptr[i];
+		}
+	}
+	return result;
+
+	//bubbleSort();
+	//return _ptr[size - 1]; This is a hack!
+}
+
+template <typename T>
+//T min();
+T Array<T>::min()
+{
+	T result = _ptr[0];
+	for (int i = 0; i < _size; i++)
+	{
+		if (result > _ptr[i])
+		{
+			result > _ptr[i];
+		}
+	}
+	return result;
+}
+
 int main()
 {
 	std::vector<int> intVector;
@@ -123,5 +156,8 @@ int main()
 	floatArray.bubbleSort();
 	floatArray.print();
 
+
+	std::cout << "Largest member: " << floatArray.max() << std::endl;
+	std::cout << "Smallest member: " << floatArray.min() << std::endl;
 	system("pause");
 }
