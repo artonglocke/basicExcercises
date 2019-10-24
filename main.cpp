@@ -1,143 +1,127 @@
 ﻿#include <iostream>
-#include <string>
 #include <vector>
-#include <deque>
-#include "Suit.h"
 
+template <typename T>
+T maximum(T x, T y)
+{
+	if (x > y)
+	{
+		return x;
+	}
+	else
+	{
+		return y;
+	}
+}
 
-class Card
+template <class T>
+void bubbleSort(T arr[], int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = size - 1; i < j ; j--)
+		{
+			if (arr[j] < arr[j - 1])
+			{
+				/*int temp = arr[j];
+				arr[j] = arr[j - 1];
+				arr[j - 1] = tmp;*/
+
+				std::swap(arr[j], arr[j - 1]);
+			}
+		}
+	}
+}
+
+template <typename T>
+class Array
 {
 public:
-	Card(int value, Suit suit)
-	{
-		if (value == 0)
-		{
-			_value = 11;
-			_name = "Ace";
-		}
-		else if (value == 10)
-		{
-			_value = 10;
-			_name = "Jack";
-		}
-		else if (value == 11)
-		{
-			_value = 10;
-			_name = "Queen";
-		}
-		else if (value == 12)
-		{
-			_value = 10;
-			_name = "King";
-		}
-		else
-		{
-			_value = ++value;
-			_name = value;
-		}
-		_suit = suit;
-	}
-	~Card() {}
+	Array(T arr[], int size);
+	~Array();
 
-	void displayCard()
-	{
-		std::cout << _name << std::endl;
-		std::cout << "Suit: ";
-		switch (_suit)
-		{
-		case Suit::Hearts:
-			std::cout << "Hearts";
-			break;
-		case Suit::Spades:
-			std::cout << "Spades";
-			break;
-		case Suit::Diamonds:
-			std::cout << "Diamonds";
-			break;
-		case Suit::Clubs:
-			std::cout << "Clubs";
-			break;
-		default:
-			break;
-		}
-		std::cout << std::endl;
-		std::cout << "Value: " << _value << std::endl;
-	}
-
-	int getValue()
-	{
-		return _value;
-	}
-
+	void print();
+	void bubbleSort();
+	T max();
+	T min();
 private:
-	std::string _name;
-	int _value;
-	Suit _suit;
-
+	T *_ptr;
+	int _size;
 };
 
-class Player
+template <typename T>
+Array<T>::Array(T arr[], int size)
 {
-public:
-
-	void showHand()
+	_ptr = new T[size];
+	_size = size;
+	for (int i = 0; i < size; i++)
 	{
-		for (auto it : _hand)
+		_ptr[i] = arr[i];
+	}
+}
+
+template <typename T>
+Array<T>::~Array()
+{
+	delete[] _ptr;
+}
+
+template <typename T>
+void Array<T>::print()
+{
+	std::cout << std::endl;
+	for (int i = 0; i < _size; i++)
+	{
+		std::cout << _ptr[i] << " ";
+	}
+}
+
+template <typename T>
+void Array<T>::bubbleSort()
+{
+	for (int i = 0; i < _size; i++)
+	{
+		for (int j = _size - 1; i < j; j--)
 		{
-			it.displayCard();
+			if (_ptr[j] < _ptr[j - 1])
+			{
+				/*int temp = _ptr[j];
+				_ptr[j] = _ptr[j - 1];
+				_ptr[j - 1] = tmp;*/
+
+				std::swap(_ptr[j], _ptr[j - 1]);
+			}
 		}
 	}
-	
-	void addCard(Card card) 
-	{
-		_hand.push_back(card);
-	}
-
-	int handValue()
-	{
-		int result = 0;
-		for (auto it : _hand)
-		{
-			result += it.getValue();
-		}
-		return result;
-	}
-private:
-	std::vector<Card> _hand;
-};
-
+}
 
 int main()
 {
-	std::deque<Card> cards;
-	for (int i = 0; i < 13; i++)
-	{
-		cards.push_back(Card(i, Suit::Hearts));
-		cards.push_back(Card(i, Suit::Spades));
-		cards.push_back(Card(i, Suit::Diamonds));
-		cards.push_back(Card(i, Suit::Clubs));
-	}
+	std::vector<int> intVector;
 
-	char choice = 'y';
-	Player firstPlayer = Player();
-	while (choice == 'y')
-	{
-		Card card = cards[cards.size() - 1];
-		card.displayCard();
-		firstPlayer.addCard(card);
-		cards.pop_back();
-		if (firstPlayer.handValue() > 21)
-		{
-			std::cout << "Sorry you failed, loser!" << std::endl;
-			break;
-		}
+	std::cout << maximum<int>(5, 10) << std::endl;
+	std::cout << maximum<float>(7.6, 4.5) << std::endl;
+	std::cout << maximum<char>('z', 'S') << std::endl;
 
-		std::cout << "Would you like another card? ";
+	int arr[] = { 10, 30, 50, 70, 27, 3, 4, 69 };
+	int size = sizeof(arr) / sizeof(int);
+	bubbleSort(arr, size);
+	std::cout << "Sorted: " << std::endl;
+	std::string letters = "dkjashdkjhaskjdhkljnasfkljueiwzfP79";
+	char chars[] = { 'd', 'k', 'j', 'a', 's', 'h', 'd', 'k', 'j', 'h', 'a', 's', 'k', 'j', 'd', 'h', 'k', 'l', 'j', 'n', 'a', 's'};
 
-		std::cin >> choice;
-		std::cout << std::endl;
-	}
-	
-	firstPlayer.showHand();
+
+	std::cout << std::endl;
+	std::cout << "Characters:" << std::endl;
+
+	int charsSize = sizeof(chars) / sizeof(char);
+	Array<char> charArray(chars, charsSize);
+	charArray.bubbleSort();
+	charArray.print();
+	float floats[] = { 37.78f, 12.9f, 32.23f, 9.0f };
+	Array<float> floatArray(floats, 4);
+	floatArray.bubbleSort();
+	floatArray.print();
+
 	system("pause");
 }
