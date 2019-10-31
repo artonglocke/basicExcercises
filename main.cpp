@@ -1,66 +1,31 @@
 ﻿#include <iostream>
 #include <vector>
-#include <memory>
+/*vektor intova, u vektor cete staviti brojeve od 1 do 20 koji su djeljivi sa brojem 3,
+  napisati funkciju koja ce ispisati taj vektor, *na to da ne smije se taj vektor 
+  kopirati prilikom slanja u funkciju*
+  */
 
-template <class R>
-class shared_ptr
+void ipsisi_bez_kopije(const std::vector<int>& v)
 {
-public:
-	shared_ptr()
+	for (const auto& i : v)
 	{
-		myHeapObject = new R();
-		referenceCount = new unsigned int(0);
-		++(*referenceCount);
+		std::cout << i << std::endl;
 	}
+}
+int main()
+{
+	std::vector<int> v;
 
-	shared_ptr(const shared_ptr<R>& other)
-	{
-		myHeapObject = other.myHeapObject;
-		referenceCount = other.referenceCount;
-		++(*referenceCount);
-	}
 
-	~shared_ptr()
+
+	for (int i = 0; i != 20; ++i)
 	{
-		--(*referenceCount);
-		if (*referenceCount == 0)
+		if (i % 3 == 0)
 		{
-			delete myHeapObject;
-			delete referenceCount;
-			myHeapObject = nullptr;
-			referenceCount = nullptr;
-
+			v.push_back(i);
 		}
 	}
 
-	R* Get()
-	{
-		return myHeapObject;
-	}
+	ipsisi_bez_kopije(v);
 
-	R& operator*()
-	{
-		return *myHeapObject;
-	}
-
-private:
-	R* myHeapObject;
-	unsigned int* referenceCount;
-};
-
-class example
-{
-public:
-	int a = 10;
-	example() = default;
-};
-int main()
-{
-	shared_ptr<example> shrdptr;
-	shared_ptr<example> e2(shrdptr);
-
-	example* e = new example;
-	delete e;
-
-	std::shared_ptr<example> e2 = std::make_shared<example>();
 }
