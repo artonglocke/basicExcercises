@@ -1,30 +1,24 @@
 ﻿#include <iostream>
 
 #include <vector>
-#include <list>
-
-using data = int;
-using cont = std::list<data>;
-
-/*   [prvi] [] [] [] [] [] [] [zadnji] [end]*/
-void ispisi_bez_kopije(const cont& v)
-{
-	for (const auto& i : v)
-	{
-		std::cout << i << std::endl;
-	}
-}
-
+#include <unordered_map>
 
 int main()
 {
-	cont lista;
-	for (int i = 0; i != 20; ++i)
+	std::unordered_map<int, int> brojevi;
+
+	for (int i = 0; i != 10; ++i)
 	{
-		if (i % 3 == 0)
-		{
-			lista.push_back(i);
-		}
+		int c = 0;
+		std::cin >> c;
+		brojevi[c]++;
 	}
-	ispisi_bez_kopije(lista);
+	
+	for (const auto& i : brojevi)
+	{
+		std::cout << "Key: " << i.first << " value:" << i.second << std::endl;
+	}
+
+
+
 }
