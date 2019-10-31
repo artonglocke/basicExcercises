@@ -1,33 +1,66 @@
 ﻿#include <iostream>
 #include <vector>
-#include "SFML/Graphics.hpp"
-#include "Entity.h"
+#include <memory>
 
+template <class R>
+class shared_ptr
+{
+public:
+	shared_ptr()
+	{
+		myHeapObject = new R();
+		referenceCount = new unsigned int(0);
+		++(*referenceCount);
+	}
+
+	shared_ptr(const shared_ptr<R>& other)
+	{
+		myHeapObject = other.myHeapObject;
+		referenceCount = other.referenceCount;
+		++(*referenceCount);
+	}
+
+	~shared_ptr()
+	{
+		--(*referenceCount);
+		if (*referenceCount == 0)
+		{
+			delete myHeapObject;
+			delete referenceCount;
+			myHeapObject = nullptr;
+			referenceCount = nullptr;
+
+		}
+	}
+
+	R* Get()
+	{
+		return myHeapObject;
+	}
+
+	R& operator*()
+	{
+		return *myHeapObject;
+	}
+
+private:
+	R* myHeapObject;
+	unsigned int* referenceCount;
+};
+
+class example
+{
+public:
+	int a = 10;
+	example() = default;
+};
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Yay!");
-	std::vector<Entity*> entities;
-	entities.push_back(new Entity("better_tank.png", sf::Vector2f(64.0f, 64.0f), Entity::Controls::Arrows));
-	entities.push_back(new Entity("better_tank.png", sf::Vector2f(64.0f, 64.0f), Entity::Controls::Wasd));
+	shared_ptr<example> shrdptr;
+	shared_ptr<example> e2(shrdptr);
 
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-			{
-				window.close();
-			}
-		}
+	example* e = new example;
+	delete e;
 
-		window.clear();
-
-		for (auto entity : entities)
-		{
-			entity->update();
-			entity->draw(window);
-		}
-		window.display();
-	}
+	std::shared_ptr<example> e2 = std::make_shared<example>();
 }
