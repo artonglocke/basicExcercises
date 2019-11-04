@@ -1,24 +1,34 @@
 ﻿#include <iostream>
+#include "SFML/Graphics.hpp"
+#include "Player.h"
 
-#include <vector>
-#include <unordered_map>
 
+// rect width 24
+// rect height 32
 int main()
 {
-	std::unordered_map<int, int> brojevi;
+	sf::RenderWindow window(sf::VideoMode(1024, 768), "Animations Demo!");
+	sf::Event sfEvent;
 
-	for (int i = 0; i != 10; ++i)
-	{
-		int c = 0;
-		std::cin >> c;
-		brojevi[c]++;
-	}
+	Player* player = new Player("player_animation_sheet.png");
 	
-	for (const auto& i : brojevi)
+
+	while (window.isOpen())
 	{
-		std::cout << "Key: " << i.first << " value:" << i.second << std::endl;
+		while (window.pollEvent(sfEvent))
+		{
+			if (sfEvent.type == sf::Event::EventType::Closed)
+			{
+				window.close();
+			}
+		}
+
+		player->update();
+
+		window.clear();
+		
+		player->draw(&window);
+
+		window.display();
 	}
-
-
-
 }
